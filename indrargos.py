@@ -67,3 +67,5 @@ class Indrargos:
         # Return an empty result if the request was not successful
         return {'text': [], 'images': []}
         
+
+    
