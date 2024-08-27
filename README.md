@@ -1,7 +1,7 @@
 # indrargos
-Portmanteau of all-seeing gods Indra & Argos, Hindu & Greek, respectively.
+Portmanteau of the all-seeing gods Indra & Argos, Hindu & Greek, respectively.
 
-![indrargos](indrargos.jpeg)
+![indrargos](viz_indrargos.jpeg)
 
 # Purpose
 Universal Newspaper url parsing library. Defined as follows:
