@@ -19,7 +19,7 @@ class Motor:
         qu = queue.Queue()
         threads = []
         for _ in range(self.MAX_CONCURRENT_CALLS):
-            thread = threading.Thread(target=worker, args=(qu,))
+            thread = threading.Thread(target=self.worker, args=(qu,))
             thread.start()
             threads.append(thread)
         for url in urls:

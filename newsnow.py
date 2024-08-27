@@ -39,28 +39,39 @@ class NewsNowScraper:
         headlines = []
         try:
             headlines = driver.find_elements(By.CLASS_NAME, 'hll')
-            print(str(headlines)[:64])
+            print("Headlines found: ", len(headlines))
             if not len(headlines):
                 raise Exception("No elements found")
-            for o in filter(lambda x:x.text.strip(),headlines):
-                print(rf'{o.text}')
+            for o in headlines:
+                if not getattr(o,'text', 0) or not o.text.strip():
+                    continue
+                headlines.append(rf'{o if type(o) == str else o.text}')
         except Exception as e:
-            print(e)
+            print('!!!',e)
         driver.quit()
         return headlines
 
     @staticmethod
-    def get_urls():
-        latest = "?type=ln"
+    def get_urls(latest=False):
+        latest = "?type=ln" if latest else ""
+        # TODO: add more urls
         newsnow_urls = [
             "https://www.newsnow.com/us/World/Latin+America/South+America",
             "https://www.newsnow.com/us/World/Europe",
-            "https://www.newsnow.com/us/World/Asia",
             "https://www.newsnow.com/us/World/Africa",
             "https://www.newsnow.com/us/World/Caribbean",
             "https://www.newsnow.com/us/World/Middle+East",
             "https://www.newsnow.com/us/World/South+Pacific"
             "https://www.newsnow.com/us/World/Latin+America/Central+America",
         ]
+        newsnow_urls = ["https://www.newsnow.com/us/World/Asia/Mongolia"]
         return [nnu+latest for nnu in newsnow_urls]
 
+
+if __name__=='__main__':
+    for url in  NewsNowScraper.get_urls():
+        hhh = NewsNowScraper.get_headlines(NewsNowScraper.make_driver(),url)
+        print(*hhh,sep='\n')
+
+    
+    # print(*['[']+[f'"{x}",' for x in o.split('\n') if x.strip()]+[']'],sep='\n')
