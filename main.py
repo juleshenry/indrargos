@@ -5,8 +5,7 @@ import asyncio
 
 
 if __name__ == "__main__":
-    # hl_dict = Indrargos(scrapers=[NewsNowScraper()]).scrape()
-    # asyncio.run(delete_data())
-    # print(hl_dict)
-    # asyncio.run(insert_data(hl_dict))
+    # asyncio.run(delete_data()) # as needed to clear the database
+    hl_dict = Indrargos(scrapers=[NewsNowScraper()]).scrape()
+    asyncio.run(insert_data(hl_dict))
     asyncio.run(query_data())
