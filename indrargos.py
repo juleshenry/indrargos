@@ -1,20 +1,12 @@
 from newsnow import NewsNowScraper
-
-
-class Partial:
-    def __init__(self, func, arg):
-        self.func, self.arg = func, arg
-
-    def __call__(self):
-        self.func(self.arg)
+from motor import MotorMonoFunction
 
 
 class Indrargos:
 
     def __init__(self, scrapers):
+        self.scrapers = None
         self.__validate_scrapers(scrapers)
-        self.scrape_funcs = []
-        self.__assemble_functors(scrapers)
 
     def __validate_scrapers(self, scrapers):
         for scraper in scrapers:
@@ -22,16 +14,20 @@ class Indrargos:
                 raise Exception(f"Scraper {scraper} does not have get_headlines method")
             if not hasattr(scraper, "get_urls"):
                 raise Exception(f"Scraper {scraper} does not have get_urls method")
-
-    def __assemble_functors(self, scrapers):
-        for scraper in scrapers:
-            for url in scraper.get_urls():
-                self.scrape_funcs += [lambda: Partial(scraper.get_headlines, url)]
+        self.scrapers = scrapers
 
     def scrape(self):
-        for functor in self.functors:
-            functor()
-
-
-if __name__ == "__main__":
-    Indrargos(scrapers=[NewsNowScraper()])
+        headlines = []
+        for scraper in self.scrapers:
+            headlines.append(
+                MotorMonoFunction(function=scraper.get_headlines).multithread_function(
+                    [
+                        (
+                            scraper.make_driver(),
+                            url,
+                        )
+                        for url in scraper.get_urls()
+                    ]
+                )
+            )
+        return headlines
