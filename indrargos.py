@@ -19,8 +19,7 @@ class Indrargos:
     def scrape(self):
         headlines = []
         for scraper in self.scrapers:
-            headlines.append(
-                MotorMonoFunction(function=scraper.get_headlines).multithread_function(
+            headlines += MotorMonoFunction(function=scraper.get_headlines).multithread_function(
                     [
                         (
                             scraper.make_driver(),
@@ -29,5 +28,5 @@ class Indrargos:
                         for url in scraper.get_urls()
                     ]
                 )
-            )
+            
         return headlines

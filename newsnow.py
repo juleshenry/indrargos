@@ -54,12 +54,11 @@ class NewsNowScraper:
         except Exception as e:
             print("!!!", e)
         driver.quit()
-        country = url.split("/")[-1].split("?")[0]
-        return {
+        country = url.split("/")[-1].split("?")[0].replace("+", " ")
+        return [{
             "country": country,
-            "headlines": headlines,
-            "datetime": str(datetime.datetime.now(datetime.timezone.utc)),
-        }
+            "headline": h
+        } for h in headlines]
 
     @staticmethod
     def get_urls(latest=True):
@@ -74,7 +73,7 @@ class NewsNowScraper:
             "https://www.newsnow.com/us/World/Latin+America/Central+America",
             "https://www.newsnow.com/us/World/North+America",
         ]
-        # newsnow_urls = ["https://www.newsnow.com/us/World/Asia/Mongolia"]
+        newsnow_urls = [newsnow_urls[0]]
         return [nnu + latest for nnu in newsnow_urls]
 
 

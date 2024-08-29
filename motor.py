@@ -14,7 +14,7 @@ class MotorMonoFunction:
             args = queue.get()
             if not args:
                 break
-            self.results.append(self.function(*args))
+            self.results.extend(self.function(*args))
             queue.task_done()
 
     def multithread_function(self, args_list):
