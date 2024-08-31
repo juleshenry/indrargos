@@ -57,7 +57,8 @@ class NewsNowScraper:
         country = url.split("/")[-1].split("?")[0].replace("+", " ")
         return [{
             "country": country,
-            "headline": h
+            "headline": h,
+            "edition": 1
         } for h in headlines]
 
     @staticmethod

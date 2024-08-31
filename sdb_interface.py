@@ -55,14 +55,5 @@ if __name__ == "__main__":
     import asyncio
     headlines = [f"Headline {i}" for i in range(10)]
     asyncio.run(
-        test_main(
-            [
-                {
-                    "headline": hl,
-                    "country": "Nigeria",
-                    "date_time": str(datetime.datetime.now(datetime.timezone.utc)),
-                }
-                for hl in headlines
-            ]
-        )
+        delete_data()
     )

@@ -1,12 +1,15 @@
 from newsnow import NewsNowScraper
 from motor import MotorMonoFunction
-
+import json
 
 class Indrargos:
 
     def __init__(self, scrapers):
         self.scrapers = None
         self.__validate_scrapers(scrapers)
+        with open("edition.json", "r") as f:
+            self.edition = json.loads(f.read())['current']
+        print(self.edition)
 
     def __validate_scrapers(self, scrapers):
         for scraper in scrapers:
@@ -30,3 +33,6 @@ class Indrargos:
                 )
             
         return headlines
+
+if __name__=='__main__':
+    Indrargos([NewsNowScraper])
