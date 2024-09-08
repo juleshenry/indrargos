@@ -12,3 +12,6 @@ Interface Indrargos:
 
 Command to start Surreal
 `surreal start --log debug --user root --pass root memory`
+
+Exported function 
+`main(edition=1)`
