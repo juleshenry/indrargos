@@ -57,8 +57,7 @@ class NewsNowScraper:
         country = url.split("/")[-1].split("?")[0].replace("+", " ")
         return [{
             "country": country,
-            "headline": h,
-            "edition": 1
+            "headline": h
         } for h in headlines]
 
     @staticmethod
@@ -74,7 +73,7 @@ class NewsNowScraper:
             "https://www.newsnow.com/us/World/Latin+America/Central+America",
             "https://www.newsnow.com/us/World/North+America",
         ]
-        newsnow_urls = [newsnow_urls[0]]
+        # newsnow_urls = [newsnow_urls[0]] # debugging purpose
         return [nnu + latest for nnu in newsnow_urls]
 
 

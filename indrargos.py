@@ -35,4 +35,4 @@ class Indrargos:
         return headlines
 
 if __name__=='__main__':
-    Indrargos([NewsNowScraper])
+    Indrargos(scrapers=[NewsNowScraper()])

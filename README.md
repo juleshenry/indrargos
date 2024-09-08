@@ -10,3 +10,5 @@ Interface Indrargos:
     see(url) -> {headlines: ["...", ...]}
     investigate(url) -> {content : "..."}
 
+Command to start Surreal
+`surreal start --log debug --user root --pass root memory`
