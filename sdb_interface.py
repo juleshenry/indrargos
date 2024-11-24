@@ -8,6 +8,9 @@ async def delete_data():
         await db.delete(db_name)
 
 async def insert_data(hl_dict):
+    # fmt: off
+    hl_dict=[{oo.replace(r'\u',''):ooo for oo,ooo in o.items()}for o in hl_dict]
+    # fmt: on
     async with Surreal("ws://localhost:8000/rpc") as db:
         await db.signin({"user": "root", "pass": "root"})
         await db.use((ns:="dev_v1"), (db_name:="headlines"))  # namespace, database
